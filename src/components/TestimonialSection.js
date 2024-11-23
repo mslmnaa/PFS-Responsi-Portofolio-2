@@ -112,7 +112,7 @@ function TestimonialSection({ isDarkMode }) {
       ref={ref}
       className={`
         min-h-screen w-full flex flex-col justify-start items-center 
-        py-8 px-4 relative overflow-hidden
+        py-8 px-4 relative overflow-hidden 
         ${isDarkMode
           ? "bg-gradient-to-br from-gray-900 to-gray-800 text-white"
           : "bg-gradient-to-br from-gray-50 to-gray-100 text-gray-900"
@@ -132,11 +132,82 @@ function TestimonialSection({ isDarkMode }) {
         >
           Client <span className="text-blue-500">Testimonials</span>
         </motion.h2>
-
         <motion.div
-          className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-8"
+          className={`p-6 rounded-xl shadow-lg ${
+            isDarkMode
+              ? "bg-gray-800 border border-gray-700"
+              : "bg-white border border-gray-200"
+          }`}
+          variants={itemVariants}
+        >
+          <h3 className="text-lg font-semibold mb-4">Add New Testimonial</h3>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              addTestimonial();
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            <input
+              type="text"
+              value={newTestimonial.name}
+              onChange={(e) => setNewTestimonial({ ...newTestimonial, name: e.target.value })}
+              placeholder="Name"
+              className={`p-2 rounded-md ${isDarkMode ? "bg-gray-700" : "bg-gray-100"}`}
+            />
+            <input
+              type="text"
+              value={newTestimonial.role}
+              onChange={(e) => setNewTestimonial({ ...newTestimonial, role: e.target.value })}
+              placeholder="Role"
+              className={`p-2 rounded-md ${isDarkMode ? "bg-gray-700" : "bg-gray-100"}`}
+            />
+            <input
+              type="text"
+              value={newTestimonial.company}
+              onChange={(e) => setNewTestimonial({ ...newTestimonial, company: e.target.value })}
+              placeholder="Company"
+              className={`p-2 rounded-md ${isDarkMode ? "bg-gray-700" : "bg-gray-100"}`}
+            />
+            <div className="sm:col-span-2">
+              <textarea
+                value={newTestimonial.content}
+                onChange={(e) => setNewTestimonial({ ...newTestimonial, content: e.target.value })}
+                placeholder="Testimonial content"
+                className={`p-2 rounded-md w-full ${isDarkMode ? "bg-gray-700" : "bg-gray-100"}`}
+                rows="3"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                value={newTestimonial.rating}
+                onChange={(e) => setNewTestimonial({ ...newTestimonial, rating: parseFloat(e.target.value) })}
+                min="0"
+                max="5"
+                step="0.5"
+                className={`p-2 rounded-md w-24 ${isDarkMode ? "bg-gray-700" : "bg-gray-100"}`}
+              />
+              <div className="flex">
+                {renderStars(newTestimonial.rating)}
+              </div>
+            </div>
+            <motion.button
+              type="submit"
+              className="px-4 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaPlus />
+              Add Testimonial
+            </motion.button>
+          </form>
+        </motion.div>
+        <motion.div
+          className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-8 mt-8"
           variants={containerVariants}
         >
+            
           {testimonials.map((testimonial) => (
             <motion.div
               key={testimonial.id}
@@ -266,77 +337,7 @@ function TestimonialSection({ isDarkMode }) {
           ))}
         </motion.div>
 
-        <motion.div
-          className={`p-6 rounded-xl shadow-lg ${
-            isDarkMode
-              ? "bg-gray-800 border border-gray-700"
-              : "bg-white border border-gray-200"
-          }`}
-          variants={itemVariants}
-        >
-          <h3 className="text-lg font-semibold mb-4">Add New Testimonial</h3>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              addTestimonial();
-            }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-          >
-            <input
-              type="text"
-              value={newTestimonial.name}
-              onChange={(e) => setNewTestimonial({ ...newTestimonial, name: e.target.value })}
-              placeholder="Name"
-              className={`p-2 rounded-md ${isDarkMode ? "bg-gray-700" : "bg-gray-100"}`}
-            />
-            <input
-              type="text"
-              value={newTestimonial.role}
-              onChange={(e) => setNewTestimonial({ ...newTestimonial, role: e.target.value })}
-              placeholder="Role"
-              className={`p-2 rounded-md ${isDarkMode ? "bg-gray-700" : "bg-gray-100"}`}
-            />
-            <input
-              type="text"
-              value={newTestimonial.company}
-              onChange={(e) => setNewTestimonial({ ...newTestimonial, company: e.target.value })}
-              placeholder="Company"
-              className={`p-2 rounded-md ${isDarkMode ? "bg-gray-700" : "bg-gray-100"}`}
-            />
-            <div className="sm:col-span-2">
-              <textarea
-                value={newTestimonial.content}
-                onChange={(e) => setNewTestimonial({ ...newTestimonial, content: e.target.value })}
-                placeholder="Testimonial content"
-                className={`p-2 rounded-md w-full ${isDarkMode ? "bg-gray-700" : "bg-gray-100"}`}
-                rows="3"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <input
-                type="number"
-                value={newTestimonial.rating}
-                onChange={(e) => setNewTestimonial({ ...newTestimonial, rating: parseFloat(e.target.value) })}
-                min="0"
-                max="5"
-                step="0.5"
-                className={`p-2 rounded-md w-24 ${isDarkMode ? "bg-gray-700" : "bg-gray-100"}`}
-              />
-              <div className="flex">
-                {renderStars(newTestimonial.rating)}
-              </div>
-            </div>
-            <motion.button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaPlus />
-              Add Testimonial
-            </motion.button>
-          </form>
-        </motion.div>
+        
       </motion.div>
     </motion.section>
   );

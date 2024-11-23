@@ -7,13 +7,17 @@ import Footer from '../components/Footer';
 import '../styles/Portfolio.css';
 import '../styles/DarkMode.css';
 import { debounce } from 'lodash';
+// import TestimonialSection from '../components/TestimonialSection'; // Update the path accordingly
+
+
 
 const PortfolioNavbar = lazy(() => import('../components/Navbar'));
 const AboutSection = lazy(() => import('../components/AboutSection'));
 const ProjectsSection = lazy(() => import('../components/ProjectsSection'));
 const SkillsSection = lazy(() => import('../components/SkillsSection'));
 const ContactSection = lazy(() => import('../components/ContactSection'));
-import TestimonialSection from '../components/TestimonialSection'; // Update the path accordingly
+const TestimonialSection = lazy(() => import('../components/TestimonialSection')); // Update the path accordingly
+
 
 
 const sections = [

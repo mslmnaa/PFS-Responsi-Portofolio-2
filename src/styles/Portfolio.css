@@ -47,6 +47,11 @@ body, html {
 
 .sections-container {
   will-change: transform;
+  
+}
+.sections-container {
+  flex: 1; /* This allows sections-container to take the available space */
+  overflow-y: auto; /* Allow scrolling */
 }
 .about-section {
   transition: all 0.3s ease-in-out;
@@ -65,6 +70,9 @@ body, html {
 /* Common Styles */
 .portfolio {
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* S
 }
 
 
@@ -223,6 +231,9 @@ footer {
   padding: 2rem;
   background: var(--bg-dark);
   color: var(--text-dark);
+  position: relative;
+  width: 100%;
+  margin-top: auto;
 }
 
 .social-links a {
